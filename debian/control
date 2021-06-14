@@ -1,0 +1,39 @@
+Source: x2gowebrpc
+Section: x11
+Priority: optional
+Maintainer: X2Go Developers <x2go-dev@lists.x2go.org>
+Uploaders:
+ Oleksandr Shneyder <o.schneydr@phoca-gmbh.de>,
+ Mike Gabriel <mike.gabriel@das-netzwerkteam.de>,
+ Mihai Moldovan <ionic@ionic.de>,
+Build-Depends:
+ debhelper (>= 9),
+Standards-Version: 4.5.1
+Homepage: https://code.x2go.org/releases/source/x2gowebrpc
+Vcs-Git: git://code.x2go.org/x2gowebrpc.git
+Vcs-Browser: https://code.x2go.org/gitweb?p=x2gowebrpc.git;a=summary
+
+Package: x2gowebrpc
+Architecture: any
+Depends:
+ libfile-touch-perl,
+ libcgi-pm-perl,
+ libencode-perl,
+ libexpect-perl,
+ libjson-perl,
+ ${misc:Depends},
+Description: X2Go HTML5 Client (Web RPC CGI Script)
+ X2Go is a server based computing environment with
+    - session resuming
+    - low bandwidth support
+    - session brokerage support
+    - client-side mass storage mounting support
+    - client-side printing support
+    - audio support
+    - authentication by smartcard and USB stick
+ .
+ The X2Go HTML5 Client provides X2Go session access via webbrowser
+ technology (supported by X2Go KDrive Xserver backend only).
+ .
+ This package contains a tiny CGI RPC script for controlling server-side
+ actions from within the HTML5 X2Go session.
