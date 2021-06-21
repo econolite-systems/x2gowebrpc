@@ -101,7 +101,7 @@ sub suspendTerminateSession
         };
     $robj->{'err'}=@out[1];
     my $jsontext =JSON->new->utf8->encode  ($robj);
-    print $jsontext;
+    print "__STARTJSON__".$jsontext;
 }
 
 sub startSession
@@ -214,7 +214,7 @@ sub startSession
 
     finish:
     my $jsontext =JSON->new->utf8->encode  ($robj);
-    print $jsontext;
+    print "__STARTJSON__".$jsontext;
 }
 
 
@@ -246,6 +246,20 @@ sub openChannel
          runSSHCommand('x2gotun',$x2gport, $localport);
     }
 }
+
+
+sub simplifyOutput
+{
+   my $stout=shift;
+   $stout=~s/\[//g;
+   $stout=~s/\]//g;
+   $stout=~s/\{//g;
+   $stout=~s/\}//g;
+   $stout=~s/\"//g;
+   $stout=~s/\'//g;
+   return $stout;
+}
+
 
 sub runSSHCommand
 {
@@ -326,7 +340,7 @@ sub runSSHCommand
         return (1,"Can't connect to Server", $exp->exp_before().$exp->exp_match());
     }
 
-    return $exp->exp_before().$exp->exp_match();
+    return simplifyOutput($exp->exp_before().$exp->exp_match());
 }
 
 sub connectToProxy
@@ -356,8 +370,8 @@ sub parseOutput
    my $err=$listout[0];
    my $stout=$listout[1];
    $stout=(split("STDOUT_END",$stout))[0];
-   $robj->{'stdout'}=$stout;
-   $robj->{'stderr'}=$err;
+   $robj->{'stdout'}=simplifyOutput($stout);
+   $robj->{'stderr'}=simplifyOutput($err);
 }
 
 sub getFreePort
