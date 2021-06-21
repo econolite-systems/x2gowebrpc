@@ -21,6 +21,7 @@ Depends:
  libencode-perl,
  libexpect-perl,
  libjson-perl,
+ websockify,
  ${misc:Depends},
 Description: X2Go HTML5 Client (Web RPC CGI Script)
  X2Go is a server based computing environment with
