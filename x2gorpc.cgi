@@ -108,7 +108,9 @@ sub startSession
 {
     my $cmd = '';
     my $geometry='';
+    my $session_type='D';
     $cmd=$q->param('cmd');
+    $session_type=$q->param('session_type');
     $geometry=$q->param('geometry');
     my $ssh_cmd='LANG= echo STDOUT_BEGIN;x2golistsessions;echo STDOUT_END 2>&1';
     my @out=runSSHCommand($ssh_cmd); #
@@ -181,7 +183,8 @@ sub startSession
                     $robj->{'session'} = $sess;
                     $sid = $details[4];
                     $x2gport=$details[5];
-                    $ssh_cmd='LANG= echo STDOUT_BEGIN;setsid /usr/bin/x2goruncommand '.$details[1].' '.$details[3].' '.$details[4].' '.$details[5].' '.$cmd.' nosnd D 1>/dev/null & sleep 1 && cat ~/.x2go/C-'.$details[4].'/cmdoutput;echo STDOUT_END;exit';
+                    $ssh_cmd='LANG= echo STDOUT_BEGIN;setsid /usr/bin/x2goruncommand '.$details[1].' '.$details[3].' '.$details[4].' '.$details[5].' '.$cmd.' nosnd '.$session_type.' 1>/dev/null & sleep 1 && cat ~/.x2go/C-'.$details[4].'/cmdoutput;echo STDOUT_END;exit';
+
             }
             else
             {
