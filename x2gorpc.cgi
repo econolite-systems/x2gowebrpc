@@ -132,7 +132,7 @@ sub startSession
         for(my $i=0;$i < @sessions;$i++)
         {
             my @details=split("\\|",$sessions[$i]);
-            if ( (@details > 8) && ($details[4] eq 'S' ) && ($details [1] =~ m/_stK$cmd/))
+            if ( (@details > 8) && ($details[4] eq 'S' ) && ($details [1] =~ m/_stK/))
             {
                 my $sess={
                             'cookie' => $details[6],
